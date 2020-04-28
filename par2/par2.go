@@ -87,7 +87,7 @@ func Verify(info *ParInfo) {
 	hash := md5.New()
 
 	for _, file := range info.Files {
-		fname := fmt.Sprintf("%s/%s", info.BaseDir, file.Filename)
+		fname := fmt.Sprintf("%s/%s", info.BaseDir, file.Filename())
 		if _, err := os.Stat(fname); os.IsNotExist(err) {
 			fmt.Printf("\t%s: missing\n", fname)
 			continue
@@ -107,7 +107,7 @@ func Verify(info *ParInfo) {
 			hash.Reset()
 		}
 		total_good += good_blocks
-		fmt.Printf("\t%s: %d/%d blocks available\n", file.Filename, good_blocks, len(file.Pairs))
+		fmt.Printf("\t%s: %d/%d blocks available\n", file.Filename(), good_blocks, len(file.Pairs))
 	}
 	missing := info.BlockCount - uint32(total_good)
 	fmt.Printf("\t-------\n\t%d missing blocks, %d recovery blocks: ", missing, len(info.RecoveryData))
