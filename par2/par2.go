@@ -89,7 +89,7 @@ func Verify(info *ParInfo) {
 	for _, file := range info.Files {
 		fname := fmt.Sprintf("%s/%s", info.BaseDir, file.Filename)
 		if _, err := os.Stat(fname); os.IsNotExist(err) {
-			fmt.Printf("\t%s: missing\n", file.Filename)
+			fmt.Printf("\t%s: missing\n", fname)
 			continue
 		}
 
